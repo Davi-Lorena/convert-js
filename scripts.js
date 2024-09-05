@@ -8,6 +8,7 @@ const amount = document.getElementById("amount")
 const currency = document.getElementById("currency")
 const footer = document.querySelector("main footer")
 const description = document.getElementById("description")
+const result = document.querySelector("h1")
 
 // Adicionando o evento input que captura todos os dígitos "digitados" para manipular seus dados
 amount.addEventListener("input", () => {
@@ -42,6 +43,19 @@ function convertCurrency(amount, price, symbol) {
         // exibindo a cotação da moeda select
 description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`
     
+//calculando o valor da moeda 
+let total = amount * price
+
+// garantindo que só terão números 
+if(isNaN(total)) {
+    return alert("Por favor, digite o valor corretamente.")
+}
+
+// formatando o valor 
+total = formatCurrencyBRL(total).replace("R$", "")
+
+// exibindo 
+result.textContent = `${total} Reais`
         //adicionando uma classe que exibe o footer 
         footer.classList.add("show-result")
     } catch (error) {
